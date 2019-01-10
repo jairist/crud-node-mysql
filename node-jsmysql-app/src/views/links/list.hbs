@@ -1,16 +1,16 @@
 <div class="container p-4">
     <div class="row">
         {{#each links}}
-           <div class="col-md-3">
+           <div class="col-md-3 p-4" >
                <div class="card text-center">
-                  <div class="card-bady">
+                  <div class="card-bady p-2" >
                       <a href="{{url}}" target="blank">
                           <h3>{{title}}</h3>
                       </a>
                       <p class="m-2">{{description}}</p>
                       <p>{{timeago create_at}}</p>
-                      <a href="/links/delete/{{id}}" class="btn btn-danger">Delete Links</a>
-                      <a href="/links/edit/{{id}}" class="btn btn-secondary">Edit</a>
+                      <a href="/links/delete/{{id}}" class="btn btn-danger p-2">Delete Links</a>
+                      <a href="/links/edit/{{id}}" class="btn btn-secondary p-2">Edit</a>
                   </div> 
                </div>
            </div>

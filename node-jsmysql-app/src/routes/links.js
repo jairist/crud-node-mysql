@@ -49,6 +49,38 @@ router.post('/edit/:id', async (req, res) => {
     res.redirect('/links');
 
 });
+// mi personalizacion para examenes
+router.get('/addquiz', (req, res)=> {
+    res.render('links/addquiz');
+});
+
+//guardar quiz en base de datos. 
+router.post('/addquiz', async (req, res) => {
+    const {title,description } = req.body;
+    const newQuiz = {
+        title,        
+        description
+    }
+    await pool.query('INSERT INTO examen set ?', [newQuiz]);
+    req.flash('success', 'Quiz seved successfully');
+    res.redirect('/links/quiz');
+});
+
+//mostrar todos los examenes guardados   GET /links/quiz
+
+router.get('/links/quiz', async (req, res) => {
+    const links = await pool.query('SELECT * FROM examen');
+    res.render('/links/quiz',{links});
+});
+
+//eliminar un quiz 
+router.get('/deletequiz/:id', async (req, res)=> {
+    console.log(req.params.id);
+    const {id} = req.params;
+    await pool.query('DELETE FROM examen WHERE id = ?',[id]);
+    req.flash('success', 'Quiz removed successfully');
+    res.render('links/quiz');
+});
 
 
 module.exports = router;
