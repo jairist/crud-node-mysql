@@ -49,28 +49,5 @@ router.post('/edit/:id', async (req, res) => {
     res.redirect('/links');
 
 });
-// mi personalizacion para examenes
-router.get('/addquiz', (req, res)=> {
-    res.render('links/addquiz');
-});
-
-//guardar quiz en base de datos. 
-router.post('/addquiz', async (req, res) => {
-    const {title,description } = req.body;
-    const newQuiz = {
-        title,        
-        description
-    }
-    await pool.query('INSERT INTO examen set ?', [newQuiz]);
-    req.flash('success', 'Quiz seved successfully');
-    res.redirect('/links');
-});
-
-//mostrar todos los examenes guardados   GET /links/quiz
-router.get('/links', async (req, res) => {
-    const links = await pool.query('SELECT * FROM examen');
-    res.render('/links/quiz',{links});
-});
-
 
 module.exports = router;
